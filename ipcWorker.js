@@ -8,14 +8,12 @@ import UUID from 'node-uuid'
 let start = () => process.on('message', (msg)=> {
   let { id, data, err } = msg
 
-  console.log(jobs)
   let jobIndex = jobs.findIndex(job => job.id === id)
  
 
   if(jobIndex !== -1){
     let job = jobs[jobIndex]
     jobs.splice(jobIndex, 1)
-    console.log(jobs)
     return job.callback(err ? err : null, data)
   } 
 
@@ -47,7 +45,6 @@ let call = (type = 'command', op, args, callback) => {
   jobs.push(job)
 
   let msg = { type, op, args, id: job.id } 
-  console.log('call')
   process.send(msg)
 }
 

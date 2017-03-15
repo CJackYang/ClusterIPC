@@ -6,7 +6,7 @@ import ipcWorker from './ipcWorker'
 
 import { getListAsync } from './files'
 
-if(cluster.isMaster){
+if (cluster.isMaster) {
   // init data source
 
   //create workers
@@ -22,7 +22,7 @@ if(cluster.isMaster){
   ipcWorker.start()
    http.createServer(function (req, res) {
     res.writeHead(200, {"content-type": "text/html"});
-    ipcWorker.call('command','FILE_LIST',{ path:__dirname }, (e,data) => {
+    ipcWorker.call('command','FILE_LIST',{ path:__dirname }, (e, data) => {
       res.write(JSON.stringify(data))
       res.end()
     })
