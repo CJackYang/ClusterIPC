@@ -52,7 +52,6 @@ const messageHandle = worker => (msg) => {
         console.log('command handler error', err)
         worker.send(errorObj(id, err))
       }else{
-        console.log(123)
         worker.send({ id, data })
       }
     })

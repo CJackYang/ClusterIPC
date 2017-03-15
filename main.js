@@ -20,11 +20,11 @@ if (cluster.isMaster) {
 
 }else if(cluster.isWorker){
   ipcWorker.start()
-   http.createServer(function (req, res) {
-    res.writeHead(200, {"content-type": "text/html"});
-    ipcWorker.call('command','FILE_LIST',{ path:__dirname }, (e, data) => {
-      res.write(JSON.stringify(data))
-      res.end()
-    })
+  http.createServer(function (req, res) {
+  res.writeHead(200, {"content-type": "text/html"});
+  ipcWorker.call('command','FILE_LIST',{ path:__dirname }, (e, data) => {
+    res.write(JSON.stringify(data))
+    res.end()
+  })
   }).listen(3000);
 }
